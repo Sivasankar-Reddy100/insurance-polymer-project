@@ -9,12 +9,12 @@
  */
 
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
-import "./shared-styles.js";
 import "@polymer/paper-input/paper-input.js";
 import "@polymer/paper-button/paper-button.js";
 import "@polymer/app-route/app-route.js";
+import "./shared-styles.js";
 
-class MyView1 extends PolymerElement {
+class MyProfileView extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles">
@@ -47,16 +47,13 @@ class MyView1 extends PolymerElement {
             color: white !important;
           }
         }
-
         paper-button.disabled {
           color: white;
           background-color: bisque;
         }
-        paper-button {
-          margin: auto;
-        }
-        h3 {
-          text-align: center;
+        .cancel-btn {
+          color: white;
+          background-color: red;
         }
         .center {
           display: flex;
@@ -64,51 +61,38 @@ class MyView1 extends PolymerElement {
           align-items: center;
         }
       </style>
-      <app-location route="{{route}}"></app-location>
       <div class="card">
-        <h3>Login Form</h3>
         <paper-input
-          id="userName"
+          type="number"
           always-float-label
-          label="User Name"
-          value="{{userName}}"
+          label="Ticket Id"
+          placeholder="Enter Ticket Id"
+        ></paper-input>
+        <paper-input type="date" always-float-label label="DOJ"></paper-input>
+        <paper-input
+          type="number"
+          always-float-label
+          label="Claim Amount"
+          placeholder="Claim Amount"
         ></paper-input>
         <paper-input
-          id="pws"
-          type="password"
+          type="number"
           always-float-label
-          label="User Password"
+          label="Bank Account Number"
+          placeholder="Account Number"
         ></paper-input>
-        <br />
         <div class="center">
           <paper-button raised class="custom indigo" on-click="handleClick"
-            >LOGIN</paper-button
+            >Confirm</paper-button
+          >
+          |
+          <paper-button raised class="custom cancel-btn" on-click="handleClick"
+            >Cancel</paper-button
           >
         </div>
-        <template is="dom-if" if="loggedIn">
-          <home-component></home-component>
-        </template>
       </div>
-      <br />
-      <div>{{userName}}</div>
     `;
-  }
-
-  static get properties() {
-    return {
-      page: {
-        type: String,
-        reflectToAttribute: true,
-        observer: "_pageChanged",
-      },
-      routeData: Object,
-      subroute: Object,
-    };
-  }
-  handleClick() {
-    this.set("route.path", "/view2");
-    localStorage.setItem("name", formValues.username);
   }
 }
 
-window.customElements.define("my-view1", MyView1);
+window.customElements.define("my-profile-view", MyProfileView);

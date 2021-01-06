@@ -10,11 +10,11 @@
 
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "./shared-styles.js";
-import "@polymer/paper-input/paper-input.js";
 import "@polymer/paper-button/paper-button.js";
+import "@polymer/paper-input/paper-input.js";
 import "@polymer/app-route/app-route.js";
 
-class MyView1 extends PolymerElement {
+class MyView4 extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles">
@@ -39,6 +39,9 @@ class MyView1 extends PolymerElement {
         paper-button.custom:hover {
           background-color: var(--paper-indigo-100);
         }
+        .cancel-btn:hover {
+          background-color: var(--paper-indigo-100) !important;
+        }
         paper-button.indigo {
           background-color: var(--paper-indigo-500);
           color: white;
@@ -47,17 +50,11 @@ class MyView1 extends PolymerElement {
             color: white !important;
           }
         }
-
-        paper-button.disabled {
+        .cancel-btn {
           color: white;
-          background-color: bisque;
+          background-color: red;
         }
-        paper-button {
-          margin: auto;
-        }
-        h3 {
-          text-align: center;
-        }
+
         .center {
           display: flex;
           justify-content: center;
@@ -66,49 +63,34 @@ class MyView1 extends PolymerElement {
       </style>
       <app-location route="{{route}}"></app-location>
       <div class="card">
-        <h3>Login Form</h3>
         <paper-input
-          id="userName"
+          type="number"
           always-float-label
-          label="User Name"
-          value="{{userName}}"
-        ></paper-input>
-        <paper-input
-          id="pws"
-          type="password"
-          always-float-label
-          label="User Password"
+          label="Vehicle Number"
+          placeholder="Enter Vehicle Number"
         ></paper-input>
         <br />
+        <div>Insurance Duration</div>
+        <paper-input type="date" always-float-label label="From"></paper-input>
+        <paper-input type="date" always-float-label label="To"></paper-input>
+        <paper-input
+          type="number"
+          always-float-label
+          label="Insurance Amount"
+          placeholder="Insurance Amount"
+        ></paper-input>
         <div class="center">
           <paper-button raised class="custom indigo" on-click="handleClick"
-            >LOGIN</paper-button
+            >Ok</paper-button
+          >
+          |
+          <paper-button raised class="custom cancel-btn" on-click="handleClick"
+            >Cancel</paper-button
           >
         </div>
-        <template is="dom-if" if="loggedIn">
-          <home-component></home-component>
-        </template>
       </div>
-      <br />
-      <div>{{userName}}</div>
     `;
-  }
-
-  static get properties() {
-    return {
-      page: {
-        type: String,
-        reflectToAttribute: true,
-        observer: "_pageChanged",
-      },
-      routeData: Object,
-      subroute: Object,
-    };
-  }
-  handleClick() {
-    this.set("route.path", "/view2");
-    localStorage.setItem("name", formValues.username);
   }
 }
 
-window.customElements.define("my-view1", MyView1);
+window.customElements.define("my-view4", MyView4);

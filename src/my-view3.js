@@ -8,8 +8,12 @@
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
-import './shared-styles.js';
+import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
+import "./shared-styles.js";
+import "@polymer/paper-input/paper-input.js";
+import "@polymer/paper-button/paper-button.js";
+import "@polymer/app-route/app-route.js";
+import "./shared-styles.js";
 
 class MyView3 extends PolymerElement {
   static get template() {
@@ -20,16 +24,74 @@ class MyView3 extends PolymerElement {
 
           padding: 10px;
         }
+        paper-button.custom {
+          --paper-button-ink-color: var(--paper-pink-a200);
+          /* These could also be individually defined for each of the
+              specific css classes, but we'll just do it once as an example */
+          --paper-button-flat-keyboard-focus: {
+            background-color: var(--paper-pink-a200) !important;
+            color: white !important;
+          }
+          --paper-button-raised-keyboard-focus: {
+            background-color: var(--paper-pink-a200) !important;
+            color: white !important;
+          }
+        }
+        paper-button.custom:hover {
+          background-color: var(--paper-indigo-100);
+        }
+        .cancel-btn:hover {
+          background-color: var(--paper-indigo-100) !important;
+        }
+        paper-button.indigo {
+          background-color: var(--paper-indigo-500);
+          color: white;
+          --paper-button-raised-keyboard-focus: {
+            background-color: var(--paper-pink-a200) !important;
+            color: white !important;
+          }
+        }
+        .cancel-btn {
+          color: white;
+          background-color: red;
+        }
+
+        .center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       </style>
 
       <div class="card">
-        <div class="circle">3</div>
-        <h1>View Three</h1>
-        <p>Modus commodo minimum eum te, vero utinam assueverit per eu.</p>
-        <p>Ea duis bonorum nec, falli paulo aliquid ei eum.Has at minim mucius aliquam, est id tempor laoreet.Pro saepe pertinax ei, ad pri animal labores suscipiantur.</p>
+        <paper-input
+          type="number"
+          always-float-label
+          label="Policy Number"
+          placeholder="Enter Policy Id"
+        ></paper-input>
+        <br />
+        <div>Policy Duration</div>
+        <paper-input type="date" always-float-label label="From"></paper-input>
+        <paper-input type="date" always-float-label label="To"></paper-input>
+        <paper-input
+          type="number"
+          always-float-label
+          label="Policy Amount"
+          placeholder="Policy Amount"
+        ></paper-input>
+        <div class="center">
+          <paper-button raised class="custom indigo" on-click="handleClick"
+            >Ok</paper-button
+          >
+          |
+          <paper-button raised class="custom cancel-btn" on-click="handleClick"
+            >Cancel</paper-button
+          >
+        </div>
       </div>
     `;
   }
 }
 
-window.customElements.define('my-view3', MyView3);
+window.customElements.define("my-view3", MyView3);

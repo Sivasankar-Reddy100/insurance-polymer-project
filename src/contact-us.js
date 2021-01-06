@@ -10,11 +10,12 @@
 
 import { PolymerElement, html } from "@polymer/polymer/polymer-element.js";
 import "./shared-styles.js";
+import "@polymer/paper-button/paper-button.js";
 import "@polymer/paper-input/paper-input.js";
 import "@polymer/paper-button/paper-button.js";
 import "@polymer/app-route/app-route.js";
 
-class MyView1 extends PolymerElement {
+class ContactUs extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles">
@@ -22,22 +23,6 @@ class MyView1 extends PolymerElement {
           display: block;
 
           padding: 10px;
-        }
-        paper-button.custom {
-          --paper-button-ink-color: var(--paper-pink-a200);
-          /* These could also be individually defined for each of the
-              specific css classes, but we'll just do it once as an example */
-          --paper-button-flat-keyboard-focus: {
-            background-color: var(--paper-pink-a200) !important;
-            color: white !important;
-          }
-          --paper-button-raised-keyboard-focus: {
-            background-color: var(--paper-pink-a200) !important;
-            color: white !important;
-          }
-        }
-        paper-button.custom:hover {
-          background-color: var(--paper-indigo-100);
         }
         paper-button.indigo {
           background-color: var(--paper-indigo-500);
@@ -47,17 +32,6 @@ class MyView1 extends PolymerElement {
             color: white !important;
           }
         }
-
-        paper-button.disabled {
-          color: white;
-          background-color: bisque;
-        }
-        paper-button {
-          margin: auto;
-        }
-        h3 {
-          text-align: center;
-        }
         .center {
           display: flex;
           justify-content: center;
@@ -66,49 +40,37 @@ class MyView1 extends PolymerElement {
       </style>
       <app-location route="{{route}}"></app-location>
       <div class="card">
-        <h3>Login Form</h3>
+        <h3 class="center">Contact Us</h3>
         <paper-input
           id="userName"
           always-float-label
-          label="User Name"
+          label="Name"
           value="{{userName}}"
         ></paper-input>
         <paper-input
           id="pws"
-          type="password"
+          type="email"
           always-float-label
-          label="User Password"
+          label="Enter Email"
+        ></paper-input>
+        <paper-input
+          id="pws"
+          type="number"
+          always-float-label
+          label="Enter Mobile No"
         ></paper-input>
         <br />
         <div class="center">
           <paper-button raised class="custom indigo" on-click="handleClick"
-            >LOGIN</paper-button
+            >SUBMIT</paper-button
           >
         </div>
         <template is="dom-if" if="loggedIn">
           <home-component></home-component>
         </template>
       </div>
-      <br />
-      <div>{{userName}}</div>
     `;
-  }
-
-  static get properties() {
-    return {
-      page: {
-        type: String,
-        reflectToAttribute: true,
-        observer: "_pageChanged",
-      },
-      routeData: Object,
-      subroute: Object,
-    };
-  }
-  handleClick() {
-    this.set("route.path", "/view2");
-    localStorage.setItem("name", formValues.username);
   }
 }
 
-window.customElements.define("my-view1", MyView1);
+window.customElements.define("contact-us", ContactUs);
